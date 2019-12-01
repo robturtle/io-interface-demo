@@ -1,12 +1,13 @@
 import { Decoder, isRight, schema } from 'io-interface';
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo';
+import { BadTodo } from '../models/bad-todo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DecoderService {
-  readonly schemas = [schema<Todo>()];
+  readonly schemas = [schema<Todo>(), schema<BadTodo>()];
 
   readonly decoder = new Decoder(this.schemas);
 
