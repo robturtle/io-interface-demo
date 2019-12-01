@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DecoderService } from './decoder.service';
-import { Todo } from '../models/todo';
-import { map, filter } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { Todo } from '../models/todo';
+import { DecoderService } from './decoder.service';
 
 @Injectable({
   providedIn: 'root',

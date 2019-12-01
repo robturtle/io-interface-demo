@@ -1,3 +1,6 @@
-<ul *ngIf="service.getTodo() | async as todo">
+<ul *ngIf="todo">
   <li>userId: {{ todo.userId }}</li>
+  <li>id: {{ todo.id }}</li>
+  <li>title: {{ todo.title }}</li>
+  <li>completed: {{ todo.completed }}</li>
 </ul>
