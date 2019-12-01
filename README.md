@@ -52,10 +52,10 @@ You should see the console message like this:
 The example code is as follows. [src/app/services/decoder.service.ts](src/app/services/decoder.service.ts)
 
 ```typescript
-import { Decoder, isRight, schema } from 'io-interface';
 import { Injectable } from '@angular/core';
-import { Todo } from '../models/todo';
+import { Decoder, schema } from 'io-interface';
 import { BadTodo } from '../models/bad-todo';
+import { Todo } from '../models/todo';
 
 @Injectable({
   providedIn: 'root',
@@ -66,21 +66,11 @@ export class DecoderService {
   readonly dec = new Decoder(this.schemas);
 
   decode<T>(typeName: string, data: unknown): T | undefined {
-    const result = this.dec.decode<T>(typeName, data);
-    if (isRight(result)) {
-      return result.right;
-    } else {
-      console.error(Decoder.errors(result));
-    }
+    return this.dec.decode<T>(typeName, data, console.error);
   }
 
   decodeArray<T>(typeName: string, data: unknown): T[] | undefined {
-    const result = this.dec.decodeArray<T>(typeName, data);
-    if (isRight(result)) {
-      return result.right;
-    } else {
-      console.error(Decoder.errors(result));
-    }
+    return this.dec.decodeArray<T>(typeName, data, console.error);
   }
 }
 ```
@@ -130,6 +120,10 @@ todo: Todo;
 
 this.service.getTodo().subscribe(todo => (this.todo = todo));
 ```
+
+## Can we do better?
+
+As you can see from the signature `decode<Todo>('Todo', json)`, `Todo` repeats twice. But for native TypeScript this is needed because the type parameter is for static environment and method parameter is for runtime environment. I don't find a very good solution here but I created a specific TypeScript transformer to expand a macro such as `decode<Todo>(json)` to `decode<Todo>('Todo', json)`. The solution will not shared here but you get the idea. Since TypeScript will never populate the interface information to runtime so I guess this would be the easiest way to reduce the duplication.
 
 ## Error handling
 
