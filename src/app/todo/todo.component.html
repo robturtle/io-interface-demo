@@ -1,1 +1,3 @@
-<p>todo works!</p>
+<ul *ngIf="service.getTodo() | async as todo">
+  <li>userId: {{ todo.userId }}</li>
+</ul>
