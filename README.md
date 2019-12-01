@@ -89,10 +89,10 @@ export class DecoderService {
 
 ### 1. define an interface
 
-Example: [src/app/models/order.ts](src/app/models/order.ts).
+Example: [src/app/models/todo.ts](src/app/models/todo.ts).
 
 ```typescript
-// src/app/models/order.ts
+// src/app/models/todo.ts
 export interface Todo {
   userId: number;
   id: number;
@@ -148,5 +148,3 @@ export interface BadTodo {
 And if you try to decode to this interface from the same backend data. You will see this error poped up.
 
 ![image](https://user-images.githubusercontent.com/3524125/69911276-eb973480-13cd-11ea-89a2-31692ba81702.png)
-
-You can write [custom reporters](https://github.com/gcanti/io-ts#error-reporters) as you like.
