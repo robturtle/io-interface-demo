@@ -9,10 +9,10 @@ import { BadTodo } from '../models/bad-todo';
 export class DecoderService {
   readonly schemas = [schema<Todo>(), schema<BadTodo>()];
 
-  readonly decoder = new Decoder(this.schemas);
+  readonly dec = new Decoder(this.schemas);
 
   decode<T>(typeName: string, data: unknown): T | undefined {
-    const result = this.decoder.decode<T>(typeName, data);
+    const result = this.dec.decode<T>(typeName, data);
     if (isRight(result)) {
       return result.right;
     } else {
@@ -21,7 +21,7 @@ export class DecoderService {
   }
 
   decodeArray<T>(typeName: string, data: unknown): T[] | undefined {
-    const result = this.decoder.decodeArray<T>(typeName, data);
+    const result = this.dec.decodeArray<T>(typeName, data);
     if (isRight(result)) {
       return result.right;
     } else {
