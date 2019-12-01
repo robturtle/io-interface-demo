@@ -1,1 +1,8 @@
-<p>bad-todo works!</p>
+<ul *ngIf="todo">
+  <li>userId: {{ todo.userId }}</li>
+  <li>id: {{ todo.id }}</li>
+  <li>title: {{ todo.title }}</li>
+  <li>completed: {{ todo.completed }}</li>
+</ul>
+
+<p *ngIf="!todo">BadTodo not instantiated, check console for errors</p>
