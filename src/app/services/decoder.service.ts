@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Decoder, schema } from 'io-interface';
+import { Decoder, schema, casters } from 'io-interface';
 import { BadTodo } from '../models/bad-todo';
 import { Todo } from '../models/todo';
 
@@ -9,7 +9,7 @@ import { Todo } from '../models/todo';
 export class DecoderService {
   readonly schemas = [schema<Todo>(), schema<BadTodo>()];
 
-  readonly dec = new Decoder(this.schemas);
+  readonly dec = new Decoder(this.schemas, casters);
 
   decode<T>(typeName: string, data: unknown): T | undefined {
     return this.dec.decode<T>(typeName, data, console.error);
